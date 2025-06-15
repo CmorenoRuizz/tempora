@@ -1,16 +1,6 @@
 import { useEffect, useState, useCallback } from "react";
 import { fetchWeatherByCoords } from "@/lib/fetchWeather";
-
-type WeatherData = {
-  city: string;
-  temperature: number;
-  feelsLike: number;
-  humidity: number;
-  pressure: number;
-  windSpeed: number;
-  description: string;
-  iconCode: string;
-};
+import type { WeatherData } from "@/types";
 
 const UPDATE_INTERVAL = 5 * 60 * 1000; // 5 minutos
 
@@ -90,5 +80,10 @@ export function useWeather() {
     };
   }, [coordinates, fetchAndSetWeather]);
 
-  return { weather, error, loading, refreshWeather };
+  const setLocation = useCallback((lat: number, lon: number) => {
+    setCoordinates({ lat, lon });
+    fetchAndSetWeather(lat, lon);
+  }, [fetchAndSetWeather]);
+
+  return { weather, error, loading, refreshWeather, setLocation };
 }
