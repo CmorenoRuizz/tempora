@@ -5,12 +5,13 @@ import WeatherCard from "@/components/WeatherCard";
 import LoadingState from "@/components/LoadingState";
 import SearchBar from "@/components/SearchBar";
 import Background from "@/components/Background";
+import { ForecastSection } from "@/components/ForecastSection";
 import { useWeather } from "@/hooks/useWeather";
 import { useCityBackground } from "@/hooks/useCityBackground";
 import { useBackgroundTransition } from "@/hooks/useBackgroundTransition";
 
 export default function Home() {
-  const { weather, loading, error, setLocation } = useWeather();
+  const { weather, loading, error, setLocation, coordinates } = useWeather();
   const { imageUrl, imageKey } = useCityBackground(weather?.city);
   const { currentImageUrl, nextImageUrl, isTransitioning, handleTransitionEnd } = 
     useBackgroundTransition(imageUrl);
@@ -56,6 +57,10 @@ export default function Home() {
         <LoadingState loading={loading} error={error} />
 
         {weather && <WeatherCard {...weather} />}
+
+        {coordinates && (
+          <ForecastSection lat={coordinates.lat} lon={coordinates.lon} />
+        )}
       </main>
     </div>
   );

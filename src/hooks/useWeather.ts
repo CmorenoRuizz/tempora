@@ -85,5 +85,5 @@ export function useWeather() {
     fetchAndSetWeather(lat, lon);
   }, [fetchAndSetWeather]);
 
-  return { weather, error, loading, refreshWeather, setLocation };
+  return { weather, error, loading, refreshWeather, setLocation, coordinates };
 }
