@@ -22,10 +22,9 @@ export default function WeatherCard({
   windSpeed,
 }: WeatherCardProps) {
   const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`;
-
   return (
-    <div className="bg-black rounded-xl shadow-md p-6 max-w-xs text-center space-y-2">
-      <h2 className="text-2xl font-semibold">{city}</h2>      <Image
+    <div className="bg-white/10 backdrop-blur-md rounded-xl shadow-lg p-6 max-w-xs text-center space-y-3 border border-white/20">
+      <h2 className="text-2xl font-semibold text-white">{city}</h2>      <Image
         src={iconUrl}
         alt={description}
         width={80}
@@ -34,14 +33,23 @@ export default function WeatherCard({
         priority
       />
 
-      <p className="text-4xl font-bold">{temperature.toFixed(1)}°C</p>
-      <p className="text-gray-600 capitalize">{description}</p>
-      <p className="text-sm text-gray-400">
-        Sensación térmica: {feelsLike.toFixed(1)}°C
-      </p>
-      <p className="text-sm text-gray-400">Humedad: {humidity}%</p>
-      <p className="text-sm text-gray-400">Presión: {pressure} hPa</p>
-      <p className="text-sm text-gray-400">Viento: {windSpeed} m/s</p>
+      <p className="text-5xl font-bold text-white">{temperature.toFixed(1)}°C</p>
+      <p className="text-white/80 capitalize text-lg">{description}</p>
+      
+      <div className="space-y-2 pt-4 border-t border-white/20">
+        <p className="text-sm text-white/70">
+          Sensación térmica: <span className="text-white font-medium">{feelsLike.toFixed(1)}°C</span>
+        </p>
+        <p className="text-sm text-white/70">
+          Humedad: <span className="text-white font-medium">{humidity}%</span>
+        </p>
+        <p className="text-sm text-white/70">
+          Presión: <span className="text-white font-medium">{pressure} hPa</span>
+        </p>
+        <p className="text-sm text-white/70">
+          Viento: <span className="text-white font-medium">{windSpeed} m/s</span>
+        </p>
+      </div>
     </div>
   );
 }

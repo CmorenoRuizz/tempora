@@ -46,21 +46,31 @@ export default function Home() {
         onTransitionEnd={handleTransitionEnd}
       />
 
-      <main className="relative z-20 flex flex-col items-center justify-center min-h-screen space-y-6 p-4">
-        <div className="text-center mb-6">
-          <h1 className="text-3xl font-bold mb-2">Clima Tempora</h1>
-          <p className="text-blue-200">Busca el clima de cualquier ciudad</p>
+      <main className="relative z-20 flex flex-col items-center justify-start min-h-screen p-4 pt-8">
+        <div className="w-full max-w-4xl mx-auto space-y-8">
+          <div className="text-center bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20">
+            <h1 className="text-4xl font-bold mb-3 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+              Clima Tempora
+            </h1>
+            <p className="text-white/80 text-lg">Busca el clima de cualquier ciudad</p>
+          </div>
+
+          <div className="flex justify-center">
+            <SearchBar onCitySelect={handleCitySelect} />
+          </div>
+
+          <LoadingState loading={loading} error={error} />
+
+          {weather && (
+            <div className="flex justify-center">
+              <WeatherCard {...weather} />
+            </div>
+          )}
+
+          {coordinates && (
+            <ForecastSection lat={coordinates.lat} lon={coordinates.lon} />
+          )}
         </div>
-
-        <SearchBar onCitySelect={handleCitySelect} />
-
-        <LoadingState loading={loading} error={error} />
-
-        {weather && <WeatherCard {...weather} />}
-
-        {coordinates && (
-          <ForecastSection lat={coordinates.lat} lon={coordinates.lon} />
-        )}
       </main>
     </div>
   );
