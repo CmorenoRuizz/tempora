@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 interface PixabayImage {
   id: number;
@@ -17,17 +17,39 @@ export function useCityBackground(cityName: string | undefined) {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  useEffect(() => {
-    if (!cityName) {
-      setImageUrl(null);
-      return;
-    }
+  const [imageKey, setImageKey] = useState<string>(''); // Para forzar transiciones
+  const loadingImageRef = useRef<HTMLImageElement | null>(null);
+  // Función para precargar imagen
+  const preloadImage = (url: string): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      // Validar URL antes de intentar cargar
+      if (!url || url === "null" || url === "undefined" || !url.startsWith('https://')) {
+        reject(new Error(`URL inválida: ${url}`));
+        return;
+      }
 
-    // TEMPORAL: Usar imagen de prueba para verificar que el fondo funciona
-    if (cityName === "Madrid" || cityName === "Barcelona" || cityName === "Sevilla") {
-      const testUrl = "https://images.unsplash.com/photo-1539037116277-4db20889f2d4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&q=80";
-      setImageUrl(testUrl);
-      console.log(`🧪 USANDO URL DE PRUEBA PARA ${cityName}: ${testUrl}`);
+      console.log("🔄 Precargando imagen:", url);
+      
+      const img = new Image();
+      loadingImageRef.current = img;
+      
+      img.onload = () => {
+        console.log("✅ Imagen precargada:", url);
+        resolve(url);
+      };
+      
+      img.onerror = () => {
+        console.warn("❌ Error cargando imagen:", url);
+        reject(new Error(`Error al cargar imagen: ${url}`));
+      };
+      
+      img.src = url;
+    });
+  };
+  useEffect(() => {
+    if (!cityName || typeof cityName !== 'string' || cityName.trim() === '') {
+      setImageUrl(null);
+      setImageKey('');
       return;
     }
 
@@ -63,39 +85,56 @@ export function useCityBackground(cityName: string | undefined) {
           throw new Error(`Error en la respuesta: ${response.status}`);
         }
 
-        const data: PixabayResponse = await response.json();        if (data.hits && data.hits.length > 0) {
+        const data: PixabayResponse = await response.json();
+
+        if (data.hits && data.hits.length > 0) {
           // Seleccionar una imagen aleatoria entre los primeros 5 resultados
           const randomIndex = Math.floor(Math.random() * data.hits.length);
           const selectedImage = data.hits[randomIndex];
           
-          // Verificar que la URL sea válida
+          // Usar largeImageURL como solicitado
           const imageUrl = selectedImage.largeImageURL;
           
           if (imageUrl && imageUrl.startsWith('https://')) {
-            setImageUrl(imageUrl);
-            console.log(`✅ Imagen de fondo cargada para ${cityName}:`);
-            console.log(`📸 URL: ${imageUrl}`);
-            console.log(`🏷️ Tags: ${selectedImage.tags}`);
+            // Precargar la imagen antes de aplicarla
+            try {
+              await preloadImage(imageUrl);
+              // Solo actualizar el estado si la imagen se cargó correctamente
+              setImageUrl(imageUrl);
+              setImageKey(`${cityName}-${Date.now()}`); // Key único para transiciones
+              console.log(`🏷️ Tags: ${selectedImage.tags}`);
+            } catch (preloadError) {
+              console.warn(`⚠️ No se pudo precargar la imagen para ${cityName}:`, preloadError);
+              // No cambiar imageUrl si la precarga falla, mantener la anterior
+            }
           } else {
             console.warn(`⚠️ URL de imagen inválida para ${cityName}:`, imageUrl);
-            setImageUrl(null);
           }
         } else {
           console.log(`⚠️ No se encontraron imágenes para ${cityName}`);
-          setImageUrl(null);
+          // No limpiar imageUrl inmediatamente, mantener la imagen anterior
         }
       } catch (err) {
         const errorMessage = err instanceof Error ? err.message : "Error desconocido";
         setError(errorMessage);
-        console.error(`❌ Error al cargar imagen de fondo para ${cityName}:`, errorMessage);
-        setImageUrl(null);
+        console.error(`❌ Error al obtener imagen de fondo para ${cityName}:`, errorMessage);
+        // No limpiar imageUrl en caso de error, mantener la imagen anterior
       } finally {
         setLoading(false);
       }
     };
 
     fetchCityBackground();
+
+    // Cleanup: cancelar imagen en carga si el componente se desmonta o cambia la ciudad
+    return () => {
+      if (loadingImageRef.current) {
+        loadingImageRef.current.onload = null;
+        loadingImageRef.current.onerror = null;
+        loadingImageRef.current = null;
+      }
+    };
   }, [cityName]);
 
-  return { imageUrl, loading, error };
+  return { imageUrl, loading, error, imageKey };
 }

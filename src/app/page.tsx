@@ -4,12 +4,16 @@ import React from "react";
 import WeatherCard from "@/components/WeatherCard";
 import LoadingState from "@/components/LoadingState";
 import SearchBar from "@/components/SearchBar";
+import Background from "@/components/Background";
 import { useWeather } from "@/hooks/useWeather";
 import { useCityBackground } from "@/hooks/useCityBackground";
+import { useBackgroundTransition } from "@/hooks/useBackgroundTransition";
 
 export default function Home() {
   const { weather, loading, error, setLocation } = useWeather();
-  const { imageUrl } = useCityBackground(weather?.city);
+  const { imageUrl, imageKey } = useCityBackground(weather?.city);
+  const { currentImageUrl, nextImageUrl, isTransitioning, handleTransitionEnd } = 
+    useBackgroundTransition(imageUrl);
 
   const handleCitySelect = ({
     lat,
@@ -24,7 +28,7 @@ export default function Home() {
 
   // Debug: Mostrar la URL en consola cuando cambie
   React.useEffect(() => {
-    if (imageUrl) {
+    if (imageUrl && imageUrl !== "null") {
       console.log("🎨 APLICANDO FONDO:", imageUrl);
     } else {
       console.log("🎨 SIN IMAGEN DE FONDO");
@@ -32,23 +36,14 @@ export default function Home() {
   }, [imageUrl]);
 
   return (
-    <div
-      className={`
-        relative text-white min-h-screen w-full 
-        bg-cover bg-center bg-no-repeat bg-fixed 
-        ${imageUrl ? "" : "bg-blue-900"}
-      `}
-      style={{
-        backgroundImage: imageUrl ? `url("${imageUrl}")` : "none",
-      }}
-    >
-      {/* Overlay para oscurecer el fondo cuando hay imagen */}
-      {imageUrl && (
-        <div
-          className="absolute inset-0 z-10"
-          style={{ backgroundColor: "rgba(0, 0, 0, 0.4)" }}
-        />
-      )}
+    <div className="relative min-h-screen w-full text-white overflow-hidden">
+      <Background
+        currentImageUrl={currentImageUrl}
+        nextImageUrl={nextImageUrl}
+        isTransitioning={isTransitioning}
+        imageKey={imageKey}
+        onTransitionEnd={handleTransitionEnd}
+      />
 
       <main className="relative z-20 flex flex-col items-center justify-center min-h-screen space-y-6 p-4">
         <div className="text-center mb-6">
@@ -61,8 +56,6 @@ export default function Home() {
         <LoadingState loading={loading} error={error} />
 
         {weather && <WeatherCard {...weather} />}
-
-        
       </main>
     </div>
   );
