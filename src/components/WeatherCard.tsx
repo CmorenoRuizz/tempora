@@ -25,13 +25,13 @@ export default function WeatherCard({
 
   return (
     <div className="bg-black rounded-xl shadow-md p-6 max-w-xs text-center space-y-2">
-      <h2 className="text-2xl font-semibold">{city}</h2>
-      <Image
+      <h2 className="text-2xl font-semibold">{city}</h2>      <Image
         src={iconUrl}
         alt={description}
         width={80}
         height={80}
         className="mx-auto"
+        priority
       />
 
       <p className="text-4xl font-bold">{temperature.toFixed(1)}°C</p>
