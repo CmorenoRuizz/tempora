@@ -12,13 +12,18 @@ type WeatherData = {
   iconCode: string;
 };
 
-export function useWeather() {  const [weather, setWeather] = useState<WeatherData | null>(null);
+const UPDATE_INTERVAL = 5 * 60 * 1000; // 5 minutos
+
+export function useWeather() {
+  const [weather, setWeather] = useState<WeatherData | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
   const [coordinates, setCoordinates] = useState<{ lat: number; lon: number } | null>(null);
-  const [initialFetchCompleted, setInitialFetchCompleted] = useState(false);
-  const fetchAndSetWeather = useCallback((lat: number, lon: number, isInitialFetch = false) => {
-    setLoading(true);
+  const fetchAndSetWeather = useCallback((lat: number, lon: number, isAutoUpdate = false) => {
+    if (!isAutoUpdate) {
+      setLoading(true);
+      console.log("🌍 Obteniendo clima inicial...");
+    }
     setError(null);
     
     fetchWeatherByCoords(lat, lon)
@@ -34,12 +39,18 @@ export function useWeather() {  const [weather, setWeather] = useState<WeatherDa
           iconCode: data.weather[0].icon,
         });
         
-        if (isInitialFetch) {
-          setInitialFetchCompleted(true);
+        if (isAutoUpdate) {
+          console.log("⏱️ Clima actualizado automáticamente");
+        } else {
+          console.log("✅ Clima inicial obtenido correctamente");
         }
       })
       .catch(() => setError("Error al obtener el clima"))
-      .finally(() => setLoading(false));
+      .finally(() => {
+        if (!isAutoUpdate) {
+          setLoading(false);
+        }
+      });
   }, []);
 
   const refreshWeather = useCallback(() => {
@@ -47,12 +58,13 @@ export function useWeather() {  const [weather, setWeather] = useState<WeatherDa
       fetchAndSetWeather(coordinates.lat, coordinates.lon);
     }
   }, [coordinates, fetchAndSetWeather]);
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (pos) => {
         const { latitude, longitude } = pos.coords;
         setCoordinates({ lat: latitude, lon: longitude });
-        fetchAndSetWeather(latitude, longitude, true); // Marcamos como fetch inicial
+        fetchAndSetWeather(latitude, longitude); // Fetch inicial
       },
       () => {
         setError("Permiso de ubicación denegado");
@@ -60,5 +72,23 @@ export function useWeather() {  const [weather, setWeather] = useState<WeatherDa
       }
     );
   }, [fetchAndSetWeather]);
-  return { weather, error, loading, refreshWeather, initialFetchCompleted };
+
+  // Efecto para el intervalo automático cada 5 minutos
+  useEffect(() => {
+    let intervalId: NodeJS.Timeout;
+
+    if (coordinates) {
+      intervalId = setInterval(() => {
+        fetchAndSetWeather(coordinates.lat, coordinates.lon, true); // Actualización automática
+      }, UPDATE_INTERVAL);
+    }
+
+    return () => {
+      if (intervalId) {
+        clearInterval(intervalId);
+      }
+    };
+  }, [coordinates, fetchAndSetWeather]);
+
+  return { weather, error, loading, refreshWeather };
 }
