@@ -48,11 +48,11 @@ export default function Home() {
 
       <main className="relative z-20 flex flex-col items-center justify-start min-h-full p-4 pt-8">
         {/* Contenedor principal único con glassmorphism - max-w-7xl */}
-        <div className="max-w-7xl w-full mx-auto p-8 rounded-xl bg-white/10 backdrop-blur-md shadow-lg border border-white/20">
-          {/* Grid Layout con filas automáticas */}
-          <div className="grid grid-cols-5 grid-rows-[auto,auto,auto,1fr,auto] gap-4">
+        <div className="max-w-7xl w-full mx-auto p-4 lg:p-8 rounded-xl bg-white/10 backdrop-blur-md shadow-lg border border-white/20">
+          {/* Grid Layout con filas automáticas - responsivo */}
+          <div className="grid grid-cols-1 lg:grid-cols-5 lg:grid-rows-[auto,auto,auto,1fr,auto] gap-4">
             {/* Título - ocupando toda la fila superior */}
-            <div className="col-span-5 text-center py-4">
+            <div className="col-span-1 lg:col-span-5 text-center py-4">
               <h1 className="text-4xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
                 Tempora
               </h1>
@@ -65,7 +65,7 @@ export default function Home() {
             </div> */}
 
             {/* Barra de búsqueda - centrada ocupando col-span-5 */}
-            <div className="col-span-5 flex justify-center items-center py-2">
+            <div className="col-span-1 lg:col-span-5 flex justify-center items-center py-2">
               <SearchBar onCitySelect={handleCitySelect} />
             </div>
 
@@ -74,14 +74,14 @@ export default function Home() {
               <>
                 {/* WeatherCard - col-span-2 con altura específica */}
                 {weather && (
-                  <div className="col-span-2 h-[400px]">
+                  <div className="col-span-1 lg:col-span-2 min-h-[300px] lg:h-[400px]">
                     <WeatherCard {...weather} />
                   </div>
                 )}
 
                 {/* HourlyForecast - col-span-3 con altura específica */}
                 {coordinates && (
-                  <div className="col-span-3 h-[400px] min-w-0">
+                  <div className="col-span-1 lg:col-span-3 min-h-[300px] lg:h-[400px] min-w-0">
                     <ForecastSection
                       lat={coordinates.lat}
                       lon={coordinates.lon}
@@ -93,7 +93,7 @@ export default function Home() {
 
                 {/* Pronóstico de 5 días - col-span-5 con altura específica */}
                 {coordinates && (
-                  <div className="col-span-5 h-[300px] min-w-0">
+                  <div className="col-span-1 lg:col-span-5 min-h-[250px] lg:h-[300px] min-w-0">
                     <ForecastSection lat={coordinates.lat} lon={coordinates.lon} showHourly={false} showDaily={true} />
                   </div>
                 )}
