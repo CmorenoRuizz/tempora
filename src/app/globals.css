@@ -146,7 +146,7 @@ body {
 /* Scrollbar personalizada para el body (scroll principal de la página) */
 body {
   --sb-track-color: #232E33;
-  --sb-thumb-color: #6482b1;
+  --sb-thumb-color: #FFFFFF;
   --sb-size: 10px;
 }
 

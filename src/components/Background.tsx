@@ -19,7 +19,7 @@ export default function Background({
     <>
       {/* Capa de fondo base (azul cuando no hay imagen) */}
       <div 
-        className={`absolute inset-0 bg-blue-900 transition-opacity duration-1000 ease-in-out ${
+        className={`absolute inset-0 bg-black transition-opacity duration-1000 ease-in-out ${
           currentImageUrl ? 'opacity-0' : 'opacity-100'
         }`}
       />

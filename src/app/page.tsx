@@ -53,7 +53,7 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-5 lg:grid-rows-[auto,auto,auto,1fr,auto] gap-4">
             {/* Título - ocupando toda la fila superior */}
             <div className="col-span-1 lg:col-span-5 text-center py-4">
-              <h1 className="text-5xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+              <h1 className="text-5xl font-bold bg-gradient-to-r bg-white bg-clip-text text-transparent">
                 Tempora
               </h1>
               {/* <p className="text-white/80 text-lg">Busca el clima de cualquier ciudad</p> */}
