@@ -6,12 +6,11 @@ interface HourlyForecastProps {
   loading: boolean
 }
 
-export function HourlyForecast({ hourlyData, loading }: HourlyForecastProps) {
-  if (loading) {
+export function HourlyForecast({ hourlyData, loading }: HourlyForecastProps) {  if (loading) {
     return (
-      <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 h-full flex flex-col">
+      <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 h-full flex flex-col min-w-0">
         <h3 className="text-lg font-semibold text-white mb-4">Pronóstico por Hora - Hoy</h3>
-        <div className="flex gap-4 overflow-x-auto pb-2 flex-1 items-center">
+        <div className="flex gap-4 overflow-x-auto pb-2 flex-1 items-center min-w-0">
           {[...Array(6)].map((_, i) => (
             <div key={i} className="flex-shrink-0 bg-white/5 rounded-lg p-3 text-center min-w-[80px] animate-pulse">
               <div className="h-4 bg-white/20 rounded mb-2"></div>
@@ -24,20 +23,18 @@ export function HourlyForecast({ hourlyData, loading }: HourlyForecastProps) {
       </div>
     )
   }
-
   if (hourlyData.length === 0) {
     return (
-      <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 h-full flex flex-col justify-center">
+      <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 h-full flex flex-col justify-center min-w-0">
         <h3 className="text-lg font-semibold text-white mb-4">Pronóstico por Hora - Hoy</h3>
         <p className="text-white/70">No hay datos disponibles</p>
       </div>
     )
   }
-
   return (
-    <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 h-full flex flex-col">
+    <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 h-full flex flex-col min-w-0">
       <h3 className="text-lg font-semibold text-white mb-4">Pronóstico por Hora - Hoy</h3>
-      <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide flex-1 items-center">
+      <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide flex-1 items-center min-w-0">
         {hourlyData.map((hour, index) => (
           <div
             key={index}

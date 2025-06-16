@@ -28,9 +28,8 @@ export function ForecastSection({ lat, lon, showHourly = true, showDaily = true 
       </div>
     );
   }
-
   return (
-    <div className="space-y-6">
+    <div className={`${showHourly && showDaily ? 'space-y-6' : ''} h-full`}>
       {showHourly && <HourlyForecast hourlyData={hourlyForecast} loading={loading} />}
       {showDaily && <DailyForecast dailyData={dailyForecast} loading={loading} />}
     </div>
