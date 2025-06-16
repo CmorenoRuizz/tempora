@@ -9,6 +9,12 @@
   ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?style=flat-square&logo=tailwind-css)
 </div>
 
+<p align="center">
+  <a href="https://tempora-weather.vercel.app/" target="_blank">
+    <img src="https://img.shields.io/badge/Visitar%20despliegue%20online-Vercel-black?style=for-the-badge&logo=vercel" alt="Ver en Vercel">
+  </a>
+</p>
+
 ## 🌤️ Descripción
 
 **Tempora** es una aplicación web moderna para consultar el clima que ofrece una experiencia visual inmersiva. Construida con Next.js 15 y React 19, la aplicación permite buscar el clima de cualquier ciudad del mundo y muestra información detallada con fondos dinámicos que cambian según la ubicación seleccionada.
