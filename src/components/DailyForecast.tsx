@@ -6,13 +6,14 @@ interface DailyForecastProps {
   loading: boolean;
 }
 
-export function DailyForecast({ dailyData, loading }: DailyForecastProps) {  if (loading) {
+export function DailyForecast({ dailyData, loading }: DailyForecastProps) {
+  if (loading) {
     return (
       <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 h-full flex flex-col min-w-0">
         <h3 className="text-lg font-semibold text-white mb-4">Pronóstico de 5 Días</h3>
-        <div className="flex gap-4 overflow-x-auto pb-2 flex-1 items-center min-w-0">
+        <div className="grid gap-4 grid-cols-[repeat(auto-fit,minmax(140px,1fr))] w-full">
           {[...Array(5)].map((_, i) => (
-            <div key={i} className="flex-shrink-0 bg-white/5 rounded-lg p-4 text-center min-w-[140px] animate-pulse">
+            <div key={i} className="bg-white/5 rounded-lg p-4 text-center animate-pulse border border-white/10">
               <div className="h-4 bg-white/20 rounded mb-3"></div>
               <div className="w-12 h-12 bg-white/20 rounded-full mx-auto mb-3"></div>
               <div className="h-3 bg-white/20 rounded mb-3"></div>
@@ -26,6 +27,7 @@ export function DailyForecast({ dailyData, loading }: DailyForecastProps) {  if 
       </div>
     );
   }
+
   if (dailyData.length === 0) {
     return (
       <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 h-full flex flex-col justify-center min-w-0">
@@ -34,14 +36,15 @@ export function DailyForecast({ dailyData, loading }: DailyForecastProps) {  if 
       </div>
     );
   }
+
   return (
     <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 h-full flex flex-col min-w-0">
       <h3 className="text-lg font-semibold text-white mb-4">Pronóstico de 5 Días</h3>
-      <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide flex-1 items-center min-w-0">
+      <div className="grid gap-4 grid-cols-[repeat(auto-fit,minmax(140px,1fr))] w-full">
         {dailyData.map((day, index) => (
           <div
             key={index}
-            className="flex-shrink-0 bg-white/5 hover:bg-white/10 transition-colors rounded-lg p-4 text-center min-w-[140px] border border-white/10"
+            className="bg-white/5 hover:bg-white/10 transition-colors rounded-lg p-4 text-center border border-white/10"
           >
             <div className="text-white/90 text-sm font-medium mb-3">
               {index === 0 ? 'Hoy' : day.dayName}
