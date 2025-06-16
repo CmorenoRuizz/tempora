@@ -6,9 +6,11 @@ import { useForecast } from "@/hooks/useForecast";
 interface ForecastSectionProps {
   lat?: number;
   lon?: number;
+  showHourly?: boolean;
+  showDaily?: boolean;
 }
 
-export function ForecastSection({ lat, lon }: ForecastSectionProps) {
+export function ForecastSection({ lat, lon, showHourly = true, showDaily = true }: ForecastSectionProps) {
   const { dailyForecast, hourlyForecast, loading, error, fetchForecast } = useForecast();
 
   useEffect(() => {
@@ -29,8 +31,8 @@ export function ForecastSection({ lat, lon }: ForecastSectionProps) {
 
   return (
     <div className="space-y-6">
-      <HourlyForecast hourlyData={hourlyForecast} loading={loading} />
-      <DailyForecast dailyData={dailyForecast} loading={loading} />
+      {showHourly && <HourlyForecast hourlyData={hourlyForecast} loading={loading} />}
+      {showDaily && <DailyForecast dailyData={dailyForecast} loading={loading} />}
     </div>
   );
 }
