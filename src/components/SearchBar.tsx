@@ -46,21 +46,25 @@ export default function SearchBar({ onCitySelect }: SearchBarProps) {
       setIsOpen(true);
     }
   };
-
   const handleInputBlur = () => {
     // Pequeño delay para permitir el clic en las sugerencias
     setTimeout(() => setIsOpen(false), 200);
   };
+
+  const handleClearInput = () => {
+    setQuery('');
+    setIsOpen(false);
+  };
   return (
-    <div className="relative w-full max-w-md">
-      <div className="relative">        <input
+    <div className="relative w-full max-w-md">      <div className="relative">
+        <input
           type="text"
           value={query}
           onChange={handleInputChange}
           onFocus={handleInputFocus}
           onBlur={handleInputBlur}
           placeholder="Buscar ciudad..."
-          className="w-full px-4 py-3 text-white placeholder-white/60 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 outline-none transition-all duration-200"
+          className="w-full px-4 py-3 pr-12 text-white placeholder-white/60 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl focus:ring-2 focus:ring-white/40 focus:border-white/40 outline-none transition-all duration-200"
           aria-label="Buscar ciudad"
           aria-expanded={isOpen}
           aria-autocomplete="list"
@@ -68,12 +72,25 @@ export default function SearchBar({ onCitySelect }: SearchBarProps) {
           role="combobox"
         />
         
+        {query.trim().length > 0 && !loading && (
+          <button
+            onClick={handleClearInput}
+            className="absolute right-3 top-1/2 transform -translate-y-1/2 w-5 h-5 flex items-center justify-center text-white/60 hover:text-white transition-colors duration-200 bg-white/10 hover:bg-white/20 rounded-full"
+            aria-label="Limpiar búsqueda"
+            type="button"
+          >
+            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        )}
+        
         {loading && (
           <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
             <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white/60"></div>
           </div>
         )}
-      </div>      {isOpen && (
+      </div>{isOpen && (
         <div id="city-suggestions" className="absolute z-10 w-full mt-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl shadow-lg max-h-60 overflow-y-auto scrollbar-glass">
           {error && (
             <div className="px-4 py-3 text-red-300 text-sm">
