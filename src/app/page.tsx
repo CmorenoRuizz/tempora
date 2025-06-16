@@ -53,10 +53,10 @@ export default function Home() {
           <div className="grid grid-cols-5 grid-rows-[auto,auto,auto,1fr,auto] gap-4">
             {/* Título - ocupando toda la fila superior */}
             <div className="col-span-5 text-center py-4">
-              <h1 className="text-4xl font-bold mb-3 bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
-                Clima Tempora
+              <h1 className="text-4xl font-bold bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+                Tempora
               </h1>
-              <p className="text-white/80 text-lg">Busca el clima de cualquier ciudad</p>
+              {/* <p className="text-white/80 text-lg">Busca el clima de cualquier ciudad</p> */}
             </div>
 
             {/* Loading State */}
@@ -91,9 +91,9 @@ export default function Home() {
                   </div>
                 )}
 
-                {/* Pronóstico de 5 días - col-span-5 con altura mínima */}
+                {/* Pronóstico de 5 días - col-span-5 con altura específica */}
                 {coordinates && (
-                  <div className="col-span-5 min-h-fit">
+                  <div className="col-span-5 h-[300px] min-w-0">
                     <ForecastSection lat={coordinates.lat} lon={coordinates.lon} showHourly={false} showDaily={true} />
                   </div>
                 )}
