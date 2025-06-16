@@ -42,7 +42,7 @@
 
 1. **Clona el repositorio**
    ```bash
-   git clone <url-del-repositorio>
+   git clone https://github.com/CmorenoRuizz/tempora.git
    cd tempora
    ```
 
@@ -84,28 +84,28 @@
 ```
 tempora/
 ├── src/
-│   ├── app/                 # App Router de Next.js
-│   │   ├── layout.tsx       # Layout principal
-│   │   ├── page.tsx         # Página principal
-│   │   └── globals.css      # Estilos globales
-│   ├── components/          # Componentes React
-│   │   ├── WeatherCard.tsx  # Tarjeta del clima actual
-│   │   ├── SearchBar.tsx    # Barra de búsqueda con autocompletado
-│   │   ├── Background.tsx   # Componente de fondo dinámico
-│   │   ├── ForecastSection.tsx # Sección de pronósticos
-│   │   ├── HourlyForecast.tsx  # Pronóstico por horas
-│   │   └── DailyForecast.tsx   # Pronóstico de 5 días
-│   ├── hooks/               # Custom Hooks
-│   │   ├── useWeather.ts    # Hook para datos del clima
-│   │   ├── useCityBackground.ts # Hook para fondos dinámicos
-│   │   ├── useCitySuggestions.ts # Hook para búsqueda de ciudades
-│   │   └── useForecast.ts   # Hook para pronósticos
-│   ├── lib/                 # Utilidades y funciones
-│   │   └── fetchWeather.ts  # Funciones para la API del clima
-│   └── types/               # Definiciones de TypeScript
-│       └── index.ts         # Tipos de datos
-├── public/                  # Archivos estáticos
-└── ...                      # Configuración del proyecto
+│   ├── app/                        # App Router de Next.js
+│   │   ├── layout.tsx              # Layout principal
+│   │   ├── page.tsx                # Página principal
+│   │   └── globals.css             # Estilos globales
+│   ├── components/                 # Componentes React
+│   │   ├── WeatherCard.tsx         # Tarjeta del clima actual
+│   │   ├── SearchBar.tsx           # Barra de búsqueda con autocompletado
+│   │   ├── Background.tsx          # Componente de fondo dinámico
+│   │   ├── ForecastSection.tsx     # Sección de pronósticos
+│   │   ├── HourlyForecast.tsx      # Pronóstico por horas
+│   │   └── DailyForecast.tsx       # Pronóstico de 5 días
+│   ├── hooks/                      # Custom Hooks
+│   │   ├── useWeather.ts           # Hook para datos del clima
+│   │   ├── useCityBackground.ts    # Hook para fondos dinámicos
+│   │   ├── useCitySuggestions.ts   # Hook para búsqueda de ciudades
+│   │   └── useForecast.ts          # Hook para pronósticos
+│   ├── lib/                        # Utilidades y funciones
+│   │   └── fetchWeather.ts         # Funciones para la API del clima
+│   └── types/                      # Definiciones de TypeScript
+│       └── index.ts                # Tipos de datos
+├── public/                         # Archivos estáticos
+└── ...                             # Configuración del proyecto
 ```
 
 ## 📱 Funcionalidades Detalladas
