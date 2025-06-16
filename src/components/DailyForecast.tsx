@@ -21,10 +21,9 @@ export function DailyForecast({ dailyData, loading }: DailyForecastProps) {
                 <div className="h-3 w-6 bg-white/20 rounded"></div>
               </div>
             </div>
-          ))}
-        </div>
+          ))}        </div>
         {/* Vista móvil con scroll horizontal */}
-        <div className="flex lg:hidden overflow-x-auto gap-4 w-full pb-2">
+        <div className="flex lg:hidden overflow-x-auto scrollbar-glass gap-4 w-full pb-2">
           <div className="flex gap-4 min-w-max">
             {[...Array(5)].map((_, i) => (
               <div key={i} className="bg-white/5 rounded-lg p-4 text-center animate-pulse border border-white/10 min-w-[120px] flex-shrink-0">
@@ -85,10 +84,9 @@ export function DailyForecast({ dailyData, loading }: DailyForecastProps) {
               </span>
             </div>
           </div>
-        ))}
-      </div>
+        ))}      </div>
       {/* Vista móvil con scroll horizontal */}
-      <div className="flex lg:hidden overflow-x-auto gap-4 w-full pb-2">
+      <div className="flex lg:hidden overflow-x-auto scrollbar-glass gap-4 w-full pb-2">
         <div className="flex gap-4 min-w-max">
           {dailyData.map((day, index) => (
             <div

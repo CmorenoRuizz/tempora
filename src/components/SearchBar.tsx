@@ -74,7 +74,7 @@ export default function SearchBar({ onCitySelect }: SearchBarProps) {
           </div>
         )}
       </div>      {isOpen && (
-        <div id="city-suggestions" className="absolute z-10 w-full mt-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl shadow-lg max-h-60 overflow-y-auto">
+        <div id="city-suggestions" className="absolute z-10 w-full mt-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-xl shadow-lg max-h-60 overflow-y-auto scrollbar-glass">
           {error && (
             <div className="px-4 py-3 text-red-300 text-sm">
               {error}

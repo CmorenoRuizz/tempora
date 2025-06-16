@@ -18,10 +18,9 @@ export function HourlyForecast({ hourlyData, loading }: HourlyForecastProps) {
               <div className="h-3 bg-white/20 rounded mb-1"></div>
               <div className="h-3 bg-white/20 rounded"></div>
             </div>
-          ))}
-        </div>
+          ))}        </div>
         {/* Vista móvil con scroll horizontal */}
-        <div className="flex lg:hidden overflow-x-auto gap-4 flex-1 items-center pb-2">
+        <div className="flex lg:hidden overflow-x-auto scrollbar-glass gap-4 flex-1 items-center pb-2">
           <div className="flex gap-4 min-w-max">
             {[...Array(6)].map((_, i) => (
               <div key={i} className="bg-white/5 rounded-lg p-4 text-center animate-pulse h-[160px] min-w-[100px] flex-shrink-0">
@@ -67,9 +66,8 @@ export function HourlyForecast({ hourlyData, loading }: HourlyForecastProps) {
             <div className="text-white/60 text-sm">{hour.feelsLike}°</div>
           </div>
         ))}
-      </div>
-      {/* Vista móvil con scroll horizontal */}
-      <div className="flex lg:hidden overflow-x-auto gap-4 flex-1 items-center pb-2">
+      </div>      {/* Vista móvil con scroll horizontal */}
+      <div className="flex lg:hidden overflow-x-auto scrollbar-glass gap-4 flex-1 items-center pb-2">
         <div className="flex gap-4 min-w-max">
           {hourlyData.map((hour, index) => (
             <div

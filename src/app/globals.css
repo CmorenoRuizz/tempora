@@ -57,3 +57,132 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* Scrollbar con efecto glassmorphism - Modo claro */
+.scrollbar-glass {
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.scrollbar-glass::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollbar-glass::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 8px;
+}
+
+.scrollbar-glass::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.scrollbar-glass::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.scrollbar-glass::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Scrollbar con efecto glassmorphism - Modo oscuro */
+.scrollbar-glass-dark {
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+.scrollbar-glass-dark::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollbar-glass-dark::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 8px;
+}
+
+.scrollbar-glass-dark::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.scrollbar-glass-dark::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.scrollbar-glass-dark::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+/* Aplicar estilos a elementos con overflow automático */
+.overflow-auto.scrollbar-glass,
+.overflow-x-auto.scrollbar-glass,
+.overflow-y-auto.scrollbar-glass,
+.overflow-scroll.scrollbar-glass {
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.overflow-auto.scrollbar-glass-dark,
+.overflow-x-auto.scrollbar-glass-dark,
+.overflow-y-auto.scrollbar-glass-dark,
+.overflow-scroll.scrollbar-glass-dark {
+  /* Firefox */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+/* Aplicar scrollbar glassmorphism globalmente a elementos específicos */
+html {
+  /* Scrollbar principal para modo claro */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+html::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+html::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Para modo oscuro automático */
+@media (prefers-color-scheme: dark) {
+  html {
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+  }
+  
+  html::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  
+  html::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+}
