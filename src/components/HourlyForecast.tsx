@@ -10,9 +10,9 @@ export function HourlyForecast({ hourlyData, loading }: HourlyForecastProps) {
   if (loading) {
     return (
       <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 h-full flex flex-col min-w-0">
-        <h3 className="text-lg font-semibold text-white mb-4 text-center">Pronóstico por Hora - Hoy</h3>        <div className="flex overflow-x-auto scrollbar-hide lg:scrollbar-glass gap-3 lg:gap-4 w-full pb-2">
+        <h3 className="text-lg font-semibold text-white mb-4 text-center">Pronóstico por Hora - Hoy</h3>        <div className="flex lg:grid lg:grid-cols-6 overflow-x-auto lg:overflow-visible scrollbar-hide gap-3 lg:gap-4 w-full pb-2 lg:pb-0">
           {[...Array(6)].map((_, i) => (
-            <div key={i} className="bg-white/5 rounded-lg p-3 lg:p-4 text-center animate-pulse h-auto min-h-[120px] border border-white/10 flex flex-col justify-center space-y-2 min-w-[90px] lg:min-w-[100px] flex-1 flex-shrink-0">
+            <div key={i} className="bg-white/5 rounded-lg p-3 lg:p-4 text-center animate-pulse h-auto min-h-[120px] border border-white/10 flex flex-col justify-center space-y-2 min-w-[90px] lg:min-w-0 flex-1 flex-shrink-0">
               <div className="h-4 bg-white/20 rounded mb-2"></div>
               <div className="w-12 h-12 bg-white/20 rounded-full mx-auto mb-2"></div>
               <div className="h-3 bg-white/20 rounded mb-1"></div>
@@ -36,11 +36,11 @@ export function HourlyForecast({ hourlyData, loading }: HourlyForecastProps) {
     <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 h-full flex flex-col min-w-0">
       <h3 className="text-lg font-semibold text-white mb-4 text-center">Pronóstico por Hora - Hoy</h3>
       {/* Contenedor unificado responsivo */}
-      <div className="flex overflow-x-auto scrollbar-hide lg:scrollbar-glass gap-3 lg:gap-4 w-full pb-2">
+      <div className="flex lg:grid lg:grid-cols-6 overflow-x-auto lg:overflow-visible scrollbar-hide gap-3 lg:gap-4 w-full pb-2 lg:pb-0">
         {hourlyData.map((hour, index) => (
           <div
             key={index}
-            className="bg-white/5 hover:bg-white/10 transition-colors rounded-lg p-3 lg:p-4 text-center h-auto min-h-[120px] border border-white/10 flex flex-col justify-center space-y-2 lg:space-y-3 min-w-[90px] lg:min-w-[100px] flex-1 flex-shrink-0"
+            className="bg-white/5 hover:bg-white/10 transition-colors rounded-lg p-2 lg:p-3 text-center h-auto min-h-[120px] border border-white/10 flex flex-col justify-center space-y-2 min-w-[90px] lg:min-w-0 flex-1 flex-shrink-0"
           >
             <div className="text-white/90 text-sm font-medium">{hour.time}</div>
             <Image
