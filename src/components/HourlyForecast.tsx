@@ -10,27 +10,15 @@ export function HourlyForecast({ hourlyData, loading }: HourlyForecastProps) {
   if (loading) {
     return (
       <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 h-full flex flex-col min-w-0">
-        <h3 className="text-lg font-semibold text-white mb-4 text-center">Pronóstico por Hora - Hoy</h3>        <div className="hidden lg:grid lg:grid-cols-[repeat(auto-fit,minmax(100px,1fr))] gap-4 flex-1 items-center">
+        <h3 className="text-lg font-semibold text-white mb-4 text-center">Pronóstico por Hora - Hoy</h3>        <div className="flex overflow-x-auto scrollbar-hide lg:scrollbar-glass gap-3 lg:gap-4 w-full pb-2">
           {[...Array(6)].map((_, i) => (
-            <div key={i} className="bg-white/5 rounded-lg p-4 text-center animate-pulse h-[160px]">
+            <div key={i} className="bg-white/5 rounded-lg p-3 lg:p-4 text-center animate-pulse h-auto min-h-[120px] border border-white/10 flex flex-col justify-center space-y-2 min-w-[90px] lg:min-w-[100px] flex-1 flex-shrink-0">
               <div className="h-4 bg-white/20 rounded mb-2"></div>
               <div className="w-12 h-12 bg-white/20 rounded-full mx-auto mb-2"></div>
               <div className="h-3 bg-white/20 rounded mb-1"></div>
               <div className="h-3 bg-white/20 rounded"></div>
             </div>
-          ))}        </div>
-        {/* Vista móvil con scroll horizontal */}
-        <div className="flex lg:hidden overflow-x-auto scrollbar-glass gap-4 flex-1 items-center pb-2">
-          <div className="flex gap-4 min-w-max">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="bg-white/5 rounded-lg p-4 text-center animate-pulse h-[160px] min-w-[100px] flex-shrink-0">
-                <div className="h-4 bg-white/20 rounded mb-2"></div>
-                <div className="w-12 h-12 bg-white/20 rounded-full mx-auto mb-2"></div>
-                <div className="h-3 bg-white/20 rounded mb-1"></div>
-                <div className="h-3 bg-white/20 rounded"></div>
-              </div>
-            ))}
-          </div>
+          ))}
         </div>
       </div>
     )
@@ -47,12 +35,12 @@ export function HourlyForecast({ hourlyData, loading }: HourlyForecastProps) {
   return (
     <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 h-full flex flex-col min-w-0">
       <h3 className="text-lg font-semibold text-white mb-4 text-center">Pronóstico por Hora - Hoy</h3>
-      {/* Vista escritorio con grid */}
-      <div className="hidden lg:grid lg:grid-cols-[repeat(auto-fit,minmax(100px,1fr))] gap-4 flex-1 items-center">
+      {/* Contenedor unificado responsivo */}
+      <div className="flex overflow-x-auto scrollbar-hide lg:scrollbar-glass gap-3 lg:gap-4 w-full pb-2">
         {hourlyData.map((hour, index) => (
           <div
             key={index}
-            className="bg-white/5 hover:bg-white/10 transition-colors rounded-lg p-4 text-center h-[160px] border border-white/10 flex flex-col justify-between"
+            className="bg-white/5 hover:bg-white/10 transition-colors rounded-lg p-3 lg:p-4 text-center h-auto min-h-[120px] border border-white/10 flex flex-col justify-center space-y-2 lg:space-y-3 min-w-[90px] lg:min-w-[100px] flex-1 flex-shrink-0"
           >
             <div className="text-white/90 text-sm font-medium">{hour.time}</div>
             <Image
@@ -66,27 +54,6 @@ export function HourlyForecast({ hourlyData, loading }: HourlyForecastProps) {
             <div className="text-white/60 text-sm">{hour.feelsLike}°</div>
           </div>
         ))}
-      </div>      {/* Vista móvil con scroll horizontal */}
-      <div className="flex lg:hidden overflow-x-auto scrollbar-glass gap-4 flex-1 items-center pb-2">
-        <div className="flex gap-4 min-w-max">
-          {hourlyData.map((hour, index) => (
-            <div
-              key={index}
-              className="bg-white/5 hover:bg-white/10 transition-colors rounded-lg p-4 text-center h-[160px] border border-white/10 flex flex-col justify-between min-w-[100px] flex-shrink-0"
-            >
-              <div className="text-white/90 text-sm font-medium">{hour.time}</div>
-              <Image
-                src={`https://openweathermap.org/img/wn/${hour.icon}@2x.png`}
-                alt="Weather icon"
-                width={50}
-                height={50}
-                className="mx-auto"
-              />
-              <div className="text-white font-semibold text-base">{hour.temp}°</div>
-              <div className="text-white/60 text-sm">{hour.feelsLike}°</div>
-            </div>
-          ))}
-        </div>
       </div>
     </div>
   )

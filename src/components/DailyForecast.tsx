@@ -10,7 +10,7 @@ export function DailyForecast({ dailyData, loading }: DailyForecastProps) {
   if (loading) {
     return (
       <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 h-full flex flex-col min-w-0">
-        <h3 className="text-lg font-semibold text-white mb-4 text-center">Pronóstico de 5 Días</h3>        <div className="hidden lg:grid lg:gap-4 lg:grid-cols-[repeat(auto-fit,minmax(140px,1fr))] w-full">
+        <h3 className="text-lg font-semibold text-white mb-4 text-center">Pronóstico de 5 Días</h3>        <div className="hidden lg:grid lg:gap-4 lg:grid-cols-5 w-full">
           {[...Array(5)].map((_, i) => (
             <div key={i} className="bg-white/5 rounded-lg p-4 text-center animate-pulse border border-white/10">
               <div className="h-4 bg-white/20 rounded mb-3"></div>
@@ -23,7 +23,7 @@ export function DailyForecast({ dailyData, loading }: DailyForecastProps) {
             </div>
           ))}        </div>
         {/* Vista móvil con scroll horizontal */}
-        <div className="flex lg:hidden overflow-x-auto scrollbar-glass gap-4 w-full pb-2">
+        <div className="flex lg:hidden overflow-x-auto scrollbar-hide gap-4 w-full pb-2">
           <div className="flex gap-4 min-w-max">
             {[...Array(5)].map((_, i) => (
               <div key={i} className="bg-white/5 rounded-lg p-4 text-center animate-pulse border border-white/10 min-w-[120px] flex-shrink-0">
@@ -54,7 +54,7 @@ export function DailyForecast({ dailyData, loading }: DailyForecastProps) {
     <div className="bg-white/10 backdrop-blur-md rounded-xl p-6 border border-white/20 h-full flex flex-col min-w-0">
       <h3 className="text-lg font-semibold text-white mb-4 text-center">Pronóstico de 5 Días</h3>
       {/* Vista escritorio con grid */}
-      <div className="hidden lg:grid lg:gap-4 lg:grid-cols-[repeat(auto-fit,minmax(140px,1fr))] w-full">
+      <div className="hidden lg:grid lg:gap-4 lg:grid-cols-5 w-full">
         {dailyData.map((day, index) => (
           <div
             key={index}
@@ -86,7 +86,7 @@ export function DailyForecast({ dailyData, loading }: DailyForecastProps) {
           </div>
         ))}      </div>
       {/* Vista móvil con scroll horizontal */}
-      <div className="flex lg:hidden overflow-x-auto scrollbar-glass gap-4 w-full pb-2">
+      <div className="flex lg:hidden overflow-x-auto scrollbar-hide gap-4 w-full pb-2">
         <div className="flex gap-4 min-w-max">
           {dailyData.map((day, index) => (
             <div

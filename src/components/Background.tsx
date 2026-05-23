@@ -17,9 +17,9 @@ export default function Background({
 }: BackgroundProps) {
   return (
     <>
-      {/* Capa de fondo base (azul cuando no hay imagen) */}
+      {/* Capa de fondo base (azul/degradado cuando no hay imagen) */}
       <div 
-        className={`absolute inset-0 bg-black transition-opacity duration-1000 ease-in-out ${
+        className={`absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900 transition-opacity duration-1000 ease-in-out ${
           currentImageUrl ? 'opacity-0' : 'opacity-100'
         }`}
       />

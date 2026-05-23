@@ -23,22 +23,22 @@ export default function WeatherCard({
 }: WeatherCardProps) {
   const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@2x.png`
   return (
-    <div className="bg-white/10 backdrop-blur-md rounded-xl shadow-lg p-6 w-full h-full text-center border border-white/20 flex flex-col justify-between">
-      <div className="flex-1 flex flex-col justify-center space-y-4">
-        <h2 className="text-2xl font-semibold text-white">{city}</h2>
+    <div className="bg-white/10 backdrop-blur-md rounded-xl shadow-lg p-4 lg:p-6 w-full h-full text-center border border-white/20 flex flex-col justify-between">
+      <div className="flex-1 flex flex-col justify-center space-y-2 lg:space-y-4">
+        <h2 className="text-xl lg:text-2xl font-semibold text-white">{city}</h2>
         <Image
           src={iconUrl || "/placeholder.svg"}
           alt={description}
           width={80}
           height={80}
-          className="mx-auto"
+          className="mx-auto w-16 h-16 lg:w-20 lg:h-20"
           priority
         />
-        <p className="text-5xl font-bold text-white">{temperature.toFixed(1)}°C</p>
-        <p className="text-white/80 capitalize text-lg">{description}</p>
+        <p className="text-4xl lg:text-5xl font-bold text-white">{temperature.toFixed(1)}°C</p>
+        <p className="text-white/80 capitalize text-base lg:text-lg">{description}</p>
       </div>
 
-      <div className="space-y-2 pt-4 border-t border-white/20 mt-auto">
+      <div className="space-y-1 lg:space-y-2 pt-2 lg:pt-4 border-t border-white/20 mt-auto">
         <p className="text-sm text-white/70">
           Sensación térmica: <span className="text-white font-medium">{feelsLike.toFixed(1)}°C</span>
         </p>
