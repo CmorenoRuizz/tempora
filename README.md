@@ -3,7 +3,7 @@
   <h1>Tempora</h1>
   <p>Una aplicación moderna del clima con fondos dinámicos y pronósticos detallados</p>
   
-  ![Next.js](https://img.shields.io/badge/Next.js-15.3.3-black?style=flat-square&logo=next.js)
+  ![Next.js](https://img.shields.io/badge/Next.js-16.2.6-black?style=flat-square&logo=next.js)
   ![React](https://img.shields.io/badge/React-19.0.0-blue?style=flat-square&logo=react)
   ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=flat-square&logo=typescript)
   ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?style=flat-square&logo=tailwind-css)
@@ -17,7 +17,7 @@
 
 ## 🌤️ Descripción
 
-**Tempora** es una aplicación web moderna para consultar el clima que ofrece una experiencia visual inmersiva. Construida con Next.js 15 y React 19, la aplicación permite buscar el clima de cualquier ciudad del mundo y muestra información detallada con fondos dinámicos que cambian según la ubicación seleccionada.
+**Tempora** es una aplicación web moderna para consultar el clima que ofrece una experiencia visual inmersiva. Construida con Next.js 16 y React 19, la aplicación permite buscar el clima de cualquier ciudad del mundo y muestra información detallada con fondos dinámicos que cambian según la ubicación seleccionada.
 
 ### ✨ Características Principales
 
@@ -31,7 +31,7 @@
 
 ## 🛠️ Tecnologías Utilizadas
 
-- **Frontend**: Next.js 15, React 19, TypeScript
+- **Frontend**: Next.js 16, React 19, TypeScript
 - **Estilos**: Tailwind CSS 4
 - **API**: OpenWeatherMap para datos del clima
 - **Imágenes**: Pixabay para fondos dinámicos
